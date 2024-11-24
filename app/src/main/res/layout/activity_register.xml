@@ -12,8 +12,7 @@
     android:layout_height="wrap_content"
     android:padding="40dp"
     android:layout_margin="50dp"
-    android:background="@color/white">>
-
+    android:background="@color/white">
     <TextView
         android:id="@+id/textView_register_head"
         android:layout_width="wrap_content"
@@ -23,14 +22,14 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textSize="20sp" />
-</RelativeLayout>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView_register_full_name"
         android:layout_below="@id/textView_register_head"
-        android:text="Full Name"
+        android:text="Full Name*"
         android:textColor="#555555"
         android:textSize="16sp"
         android:layout_marginTop="50dp" />
@@ -46,4 +45,5 @@
     android:layout_below="@id/textView_register_full_name"
     android:background="@drawable/border"/>
 
+    </RelativeLayout>
 </ScrollView>
