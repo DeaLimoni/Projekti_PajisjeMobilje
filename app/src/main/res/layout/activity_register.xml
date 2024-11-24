@@ -45,5 +45,86 @@
     android:layout_below="@id/textView_register_full_name"
     android:background="@drawable/border"/>
 
-    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_register_email"
+        android:layout_below="@id/textView_register_full_name"
+        android:text="Email*"
+        android:textColor="#555555"
+        android:textSize="16sp"
+        android:layout_marginTop="40dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_register_email"
+        android:hint="Enter your email"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        android:padding="6dp"
+        android:layout_below="@id/textView_register_email"
+        android:background="@drawable/border"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_register_dob"
+        android:layout_below="@id/textView_register_email"
+        android:text="Date of Birth(dd/mm/yyyy)*"
+        android:textColor="#555555"
+        android:textSize="16sp"
+        android:layout_marginTop="39dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_register_dob"
+        android:hint="Enter your date of birth(dd/mm/yyyy)"
+        android:inputType="date"
+        android:textSize="16sp"
+        android:padding="6dp"
+        android:layout_below="@id/textView_register_dob"
+        android:background="@drawable/border"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_register_gender"
+        android:layout_below="@id/textView_register_dob"
+        android:text="Gender*"
+        android:textColor="#555555"
+        android:textSize="16sp"
+        android:layout_marginTop="39dp" />
+
+ <RadioGroup
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     android:layout_below="@id/textView_register_gender"
+     android:id="@+id/radio_group_register_gender">
+     <RadioButton
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/radio_female"
+         android:text="Female"
+         android:textSize="16sp"
+         android:textColor="#555555">
+
+     <RadioButton
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/radio_Male"
+         android:text="Male"
+         android:textSize="16sp"
+         android:textColor="#555555"
+         android:layout_marginLeft="10dp">
+
+
+ </RadioGroup>
+
+
+
+</RelativeLayout>
 </ScrollView>
