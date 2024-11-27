@@ -3,23 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="700dp"
+    android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@color/light_gray">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="40dp"
-        android:padding="2dp"
+        android:layout_height="wrap_content"
+        android:padding="80dp"
+        android:layout_margin="20dp"
         android:background="@color/white">
 
         <ImageView
             android:id="@+id/imageView_logo"
-            android:layout_width="434dp"
-            android:layout_height="252dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+
             android:adjustViewBounds="true"
             android:maxWidth="190dp"
             app:srcCompat="@drawable/foto1" />
@@ -27,10 +27,10 @@
 
         <TextView
             android:id="@+id/textView_main_head"
-            android:layout_width="500dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/imageView_logo"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:text="Welcome to Android Firebase App"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
@@ -40,11 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView_main_head"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="@android:color/holo_red_dark"
             android:text="Login"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
@@ -54,11 +52,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/button_login"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="16dp"
             android:background="@android:color/holo_red_dark"
             android:text="Register"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />

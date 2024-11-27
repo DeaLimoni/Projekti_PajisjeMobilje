@@ -1,6 +1,8 @@
 package com.example.projekti_pajisjemobilje;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,10 +47,42 @@ public class RegisterActivity extends AppCompatActivity {
         Button buttonRegister = findViewById(R.id.button_register);
         buttonRegister.setOnClickListener(new View.OnClickListener(){
         @Override
-            public void onClick(View v){
+            public void onClick(View v) {
+
+            int selectedGenderId = radioGroupRegisterGender.getCheckedRadioButtonId();
+            radioButtonRegisterGenderSelected = findViewById(selectedGenderId);
+
+
+//obtain the entered data
+            String textFullName = editTextRegisterFullName.getText().toString();
+            String textEmail = editTextRegisterEmail.getText().toString();
+            String textDob = editTextRegisterDoB.getText().toString();
+            String textMobile = editTextRegisterMobile.getText().toString();
+            String textPwd = editTextRegisterPwd.getText().toString();
+            String textConfirmed = editTextRegisterConfirmPwd.getText().toString();
+            String textGender;
+            if (TextUtils.isEmpty(textFullName)) {
+                Toast.makeText(RegisterActivity.this, "Please enter your full name", Toast.LENGTH_LONG).show();
+                editTextRegisterFullName.setError("Full Name is required");
+                editTextRegisterFullName.requestFocus();
+            } else if (TextUtils.isEmpty(textEmail)) {
+                Toast.makeText(RegisterActivity.this, "Please enter your email", Toast.LENGTH_LONG).show();
+            editTextRegisterEmail.setError("Email is required");
+                editTextRegisterEmail.requestFocus();
+            }else if(!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
+                Toast.makeText(RegisterActivity.this, "Please re-enter your email", Toast.LENGTH_LONG).show();
+                editTextRegisterEmail.setError("Valid email is required");
+                editTextRegisterEmail.requestFocus();
+            }else if (TextUtils.isEmpty(textDoB)){
+                Toast.makeText(RegisterActivity.this, "Please your date of birth", Toast.LENGTH_LONG).show();
+                editTextRegisterDoB.setError("Date of Birth is required");
+                editTextRegisterDoB.requestFocus();
+            }
+
+
 
         }
 
-        }
+        });
     }
 }
