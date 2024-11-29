@@ -73,15 +73,17 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "Please re-enter your email", Toast.LENGTH_LONG).show();
                 editTextRegisterEmail.setError("Valid email is required");
                 editTextRegisterEmail.requestFocus();
-            }else if (TextUtils.isEmpty(textDoB)){
-                Toast.makeText(RegisterActivity.this, "Please your date of birth", Toast.LENGTH_LONG).show();
+            }else if (TextUtils.isEmpty(textDob)) { // Përdorni textDob këtu
+                Toast.makeText(RegisterActivity.this, "Please enter your date of birth", Toast.LENGTH_LONG).show();
                 editTextRegisterDoB.setError("Date of Birth is required");
                 editTextRegisterDoB.requestFocus();
+            }else if(radioButtonRegisterGenderSelected.getCheckedRadioButtonId() == -1){
+                Toast.makeText(RegisterActivity.this, "Please select your gender", Toast.LENGTH_LONG).show();
+                radioButtonRegisterGenderSelected.setError("gender is required");
+                radioButtonRegisterGenderSelected.requestFocus();
+        }else if(TextUtils.isEmpty(textMobile)){
+
             }
-
-
-
-        }
 
         });
     }
