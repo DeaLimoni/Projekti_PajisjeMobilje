@@ -205,7 +205,8 @@
             android:layout_below="@id/button_register"
             android:layout_centerHorizontal="true"
             android:elevation="10dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:indeterminate="true"/>
 
     </RelativeLayout>
 </ScrollView>

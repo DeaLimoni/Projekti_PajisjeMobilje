@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -39,7 +40,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        getSupportActionBar().setTitle("Register");
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Regjistrohu");
+        }
 
         Toast.makeText(RegisterActivity.this, "You can register now", Toast.LENGTH_LONG).show();
         editTextRegisterFullName = findViewById(R.id.editText_register_full_name);
@@ -56,7 +60,6 @@ public class RegisterActivity extends AppCompatActivity {
         findViewById(R.id.button_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int selectedGenderId = radioGroupRegisterGender.getCheckedRadioButtonId();
                 radioButtonRegisterGenderSelected = findViewById(selectedGenderId);
 
@@ -92,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(textMobile)) {
                     Toast.makeText(RegisterActivity.this, "Please enter your mobile no.", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("Mobile no. is required");
-                } else if (textMobile.length() != 10) {
+                } else if (textMobile.length() != 9) {
                     Toast.makeText(RegisterActivity.this, "Please re-enter your mobile no.", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("mobile no. should be 10 digits");
                     editTextRegisterMobile.requestFocus();
@@ -133,6 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
                                     FirebaseUser firebaseUser = auth.getCurrentUser();
+                                    progressBar.setVisibility(View.VISIBLE);
                              /*/open the user profile after successful registration
                                  Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
                              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
