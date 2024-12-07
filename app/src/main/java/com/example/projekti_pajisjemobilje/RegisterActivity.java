@@ -1,5 +1,6 @@
 package com.example.projekti_pajisjemobilje;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -12,10 +13,18 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -80,11 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                     editTextRegisterDoB.requestFocus();
                 } else if (radioGroupRegisterGender.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(RegisterActivity.this, "Please select your gender", Toast.LENGTH_LONG).show();
-                    // Nuk mund të përdorni `radioButtonRegisterGenderSelected` sepse ende nuk është inicializuar
-                } else {
-                    // Inicializo `radioButtonRegisterGenderSelected` vetëm kur ka një gjini të përzgjedhur
                     radioButtonRegisterGenderSelected = findViewById(radioGroupRegisterGender.getCheckedRadioButtonId());
-                    // Merr tekstin e gjinisë së përzgjedhur
                     textGender = radioButtonRegisterGenderSelected.getText().toString();
                 } else if (TextUtils.isEmpty(textMobile)) {
                     Toast.makeText(RegisterActivity.this, "Please enter your mobile no.", Toast.LENGTH_LONG).show();
@@ -114,16 +119,38 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     textGender = radioButtonRegisterGenderSelected.getText().toString();
                     progressBar.setVisibility(View.VISIBLE);
-                    registerReceiver(textFullName, textEmail, textDoB, textGender, textMobile, textPwd);
+                    registerReceiver(textFullName, textEmail, textDob, textGender, textMobile, textPwd);
 
 
                 }
             }
 
+            //register user using the credentials given
+            private void registerReceiver(String textFullName, String textEmail, String textDob, String textGender, String textMobile, String textPwd) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.createUserWithEmailAndPassword(textEmail, textPwd).addOnCompleteListener(RegisterActivity.this,
+                        new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
+                                    // send verification email
+                                    FirebaseUser firebaseUser = auth.getCurrentUser();
+                             /*/open the user profile after successful registration
+                                 Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
+                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                     | Intent.FLAG_ACTIVITY_NEW_TASK);
+                              startActivity(intent);
+                              finish(); //to close register activity*/
+                                }
+                            }
+                        });
+            }
         });
     }
-
-
-
-
 }
+
+
+
+
+

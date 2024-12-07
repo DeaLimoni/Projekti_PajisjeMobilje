@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "776868873211",
+    "project_id": "projekti-pajisjemobilje",
+    "storage_bucket": "projekti-pajisjemobilje.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776868873211:android:d4797d336c29a3bf81415e",
+        "android_client_info": {
+          "package_name": "com.example.projekti_pajisjemobilje"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg_W0saEmOesMJUJcAAB9LUyMmifAKPRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
