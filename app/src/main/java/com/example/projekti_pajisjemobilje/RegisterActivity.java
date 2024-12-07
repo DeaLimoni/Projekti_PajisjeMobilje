@@ -53,8 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         radioGroupRegisterGender.clearCheck();
         progressBar = findViewById(R.id.progressBar);
 
-        Button buttonRegister = findViewById(R.id.button_register);
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -118,14 +117,14 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     textGender = radioButtonRegisterGenderSelected.getText().toString();
                     progressBar.setVisibility(View.VISIBLE);
-                    registerReceiver(textFullName, textEmail, textDob, textGender, textMobile, textPwd);
+                    registerUser(textFullName, textEmail, textDob, textGender, textMobile, textPwd);
 
 
                 }
             }
 
             //register user using the credentials given
-            private void registerReceiver(String textFullName, String textEmail, String textDob, String textGender, String textMobile, String textPwd) {
+            private void registerUser(String textFullName, String textEmail, String textDob, String textGender, String textMobile, String textPwd) {
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 auth.createUserWithEmailAndPassword(textEmail, textPwd).addOnCompleteListener(RegisterActivity.this,
                         new OnCompleteListener<AuthResult>() {

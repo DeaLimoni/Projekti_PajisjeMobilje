@@ -57,6 +57,8 @@
             android:layout_marginTop="16dp"
             android:background="@android:color/holo_red_dark"
             android:text="Register"
+            android:clickable="true"
+            android:focusable="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     </RelativeLayout>
