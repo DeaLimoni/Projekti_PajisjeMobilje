@@ -51,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         //radio button for gender
         radioGroupRegisterGender = findViewById(R.id.radio_group_register_gender);
         radioGroupRegisterGender.clearCheck();
-
+        progressBar = findViewById(R.id.progressBar);
 
         Button buttonRegister = findViewById(R.id.button_register);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +90,6 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (radioGroupRegisterGender.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(RegisterActivity.this, "Please select your gender", Toast.LENGTH_LONG).show();
                     radioButtonRegisterGenderSelected = findViewById(radioGroupRegisterGender.getCheckedRadioButtonId());
-                    textGender = radioButtonRegisterGenderSelected.getText().toString();
                 } else if (TextUtils.isEmpty(textMobile)) {
                     Toast.makeText(RegisterActivity.this, "Please enter your mobile no.", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("Mobile no. is required");
@@ -134,7 +133,6 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
-                                    // send verification email
                                     FirebaseUser firebaseUser = auth.getCurrentUser();
                              /*/open the user profile after successful registration
                                  Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
