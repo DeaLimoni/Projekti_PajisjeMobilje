@@ -2,6 +2,7 @@ package com.example.projekti_pajisjemobilje;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -137,6 +138,14 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
                                     FirebaseUser firebaseUser = auth.getCurrentUser();
                                     progressBar.setVisibility(View.VISIBLE);
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            progressBar.setVisibility(View.GONE);
+                                            Toast.makeText(RegisterActivity.this, "User registered successfully!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }, 4000);
                              /*/open the user profile after successful registration
                                  Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
                              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
