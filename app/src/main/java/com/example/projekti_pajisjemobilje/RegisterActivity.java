@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -35,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private RadioGroup radioGroupRegisterGender;
     private RadioButton radioButtonRegisterGenderSelected;
-
+private static final String TAG="RegisterActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,21 +141,36 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
                                     FirebaseUser firebaseUser = auth.getCurrentUser();
-                                    progressBar.setVisibility(View.VISIBLE);
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
+                                   //enter user data into the firebase realtime database
+                                        ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textFullName, textDob, textGender, textMobile);
 
-                                            progressBar.setVisibility(View.GONE);
-                                            Toast.makeText(RegisterActivity.this, "User registered successfully!", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }, 4000);
+
+
+                                    firebaseUser.sendEmailVerification();
+
                              /*/open the user profile after successful registration
                                  Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
                              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                                      | Intent.FLAG_ACTIVITY_NEW_TASK);
                               startActivity(intent);
                               finish(); //to close register activity*/
+                                } else{
+                                    try{
+                                        throw task.getException();
+                                    } catch(FirebaseAuthWeakPasswordException e){
+                                        editTextRegisterPwd.requestFocus();
+                                        editTextRegisterPwd.setError("Your password is too weak. Kindly use a mix of alphabets,numbers and special charcters.");
+                                    }catch(FirebaseAuthInvalidCredentialsException e) {
+                                        editTextRegisterPwd.requestFocus();
+                                        editTextRegisterPwd.setError("Your email is invalid or already in use.Kindly re-enter.");
+                                    }catch(FirebaseAuthUserCollisionException e){
+                                        editTextRegisterPwd.requestFocus();
+                                        editTextRegisterPwd.setError("User is already registered with this email.Use another email.");
+                                    }catch (Exception e){
+                                        Log.e(TAG, e.getMessage());
+                                        Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                   progressBar.setVisibility(View.GONE);
+                                    }
                                 }
                             }
                         });
