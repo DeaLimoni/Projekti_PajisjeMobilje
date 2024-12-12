@@ -35,6 +35,9 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText editTextRegisterFullName, editTextRegisterEmail, editTextRegisterDoB,
@@ -76,10 +79,19 @@ private static final String TAG="RegisterActivity";
                 String textFullName = editTextRegisterFullName.getText().toString();
                 String textEmail = editTextRegisterEmail.getText().toString();
                 String textDob = editTextRegisterDoB.getText().toString();
-                String textMobile = editTextRegisterMobile.getText().toString();
+                String textMobile = editTextRegisterMobile.getText().toString().trim();;
                 String textPwd = editTextRegisterPwd.getText().toString();
                 String textConfirmPwd = editTextRegisterConfirmPwd.getText().toString().trim();
                 String textGender;
+
+                //validate mobile number using matcher and pattern
+                String mobileRegex ="0[0-9]{9}";
+                Pattern mobilePattern = Pattern.compile(mobileRegex);
+                Matcher mobileMatcher = mobilePattern.matcher(textMobile);
+
+
+
+
 
                 if (TextUtils.isEmpty(textFullName)) {
                     Toast.makeText(RegisterActivity.this, "Please enter your full name", Toast.LENGTH_LONG).show();
@@ -105,9 +117,15 @@ private static final String TAG="RegisterActivity";
                     editTextRegisterMobile.setError("Mobile no. is required");
                 } else if (textMobile.length() != 9) {
                     Toast.makeText(RegisterActivity.this, "Please re-enter your mobile no.", Toast.LENGTH_LONG).show();
-                    editTextRegisterMobile.setError("mobile no. should be 10 digits");
+                    editTextRegisterMobile.setError("mobile No. should be 9 digits");
                     editTextRegisterMobile.requestFocus();
-                } else if (TextUtils.isEmpty(textPwd)) {
+                } else if (!mobileMatcher.matches()){
+                    Toast.makeText(RegisterActivity.this, "Please re-enter your mobile no.", Toast.LENGTH_LONG).show();
+                    editTextRegisterMobile.setError("mobile No. is not valid");
+                    editTextRegisterMobile.requestFocus();
+                }
+
+                else if (TextUtils.isEmpty(textPwd)) {
                     Toast.makeText(RegisterActivity.this, "Please enter your password", Toast.LENGTH_LONG).show();
                     editTextRegisterPwd.setError("Password is required");
                     editTextRegisterPwd.requestFocus();
