@@ -31,6 +31,9 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -139,21 +142,39 @@ private static final String TAG="RegisterActivity";
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
+
                                     FirebaseUser firebaseUser = auth.getCurrentUser();
-                                   //enter user data into the firebase realtime database
-                                        ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textFullName, textDob, textGender, textMobile);
+                                  UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(textFullName).build();
+                                  firebaseUser.updateProfile(profileChangeRequest);
 
 
+                                    //enter user data into the firebase realtime database
+                                    ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textDob, textGender, textMobile);
+                                        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered user");
 
-                                    firebaseUser.sendEmailVerification();
+                                    referenceProfile.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
 
-                             /*/open the user profile after successful registration
-                                 Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
-                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                     | Intent.FLAG_ACTIVITY_NEW_TASK);
-                              startActivity(intent);
-                              finish(); //to close register activity*/
+                                            if (task.isSuccessful()) {
+                                                firebaseUser.sendEmailVerification();
+                                                Toast.makeText(RegisterActivity.this, "User registered successfully.Please verify your email", Toast.LENGTH_LONG).show();
+                                                /*/open the user profile after successful registration
+                                                Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
+                                                finish(); //to close register activity*/
+                                            } else {
+                                                Toast.makeText(RegisterActivity.this, "User registered failed.Please try again!", Toast.LENGTH_LONG).show();
+
+                                            }
+                                            progressBar.setVisibility(View.GONE);
+                                        }
+
+
+                                    });
+
                                 } else{
                                     try{
                                         throw task.getException();
@@ -169,8 +190,9 @@ private static final String TAG="RegisterActivity";
                                     }catch (Exception e){
                                         Log.e(TAG, e.getMessage());
                                         Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                   progressBar.setVisibility(View.GONE);
+
                                     }
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             }
                         });
