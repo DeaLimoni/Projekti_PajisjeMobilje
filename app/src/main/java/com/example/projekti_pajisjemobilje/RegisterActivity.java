@@ -115,11 +115,11 @@ private static final String TAG="RegisterActivity";
                 } else if (TextUtils.isEmpty(textMobile)) {
                     Toast.makeText(RegisterActivity.this, "Please enter your mobile no.", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("Mobile no. is required");
-                } if (textMobile.length() != 9) { // Duhet të jetë 10 karaktere (përfshirë numrin 0 në fillim)
+                } if (textMobile.length() != 9) {
                     Toast.makeText(RegisterActivity.this, "Please re-enter your mobile no.", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("Mobile No. should be 9 digits");
                     editTextRegisterMobile.requestFocus();
-                } else if (!mobileMatcher.matches()) { // Kontrollon përputhjen me regex
+                } else if (!mobileMatcher.matches()) {
                     Toast.makeText(RegisterActivity.this, "Please re-enter your mobile no.", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("Mobile No. is not valid");
                     editTextRegisterMobile.requestFocus();
