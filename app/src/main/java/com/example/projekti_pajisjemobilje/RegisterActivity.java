@@ -85,9 +85,9 @@ private static final String TAG="RegisterActivity";
                 String textGender;
 
                 //validate mobile number using matcher and pattern
-                String mobileRegex ="0[0-9]{9}";
+                String mobileRegex = "^0[0-9]{8}$";
                 Pattern mobilePattern = Pattern.compile(mobileRegex);
-                Matcher mobileMatcher = mobilePattern.matcher(textMobile);
+                Matcher mobileMatcher = mobilePattern.matcher(textMobile.trim());
 
 
 
@@ -115,13 +115,13 @@ private static final String TAG="RegisterActivity";
                 } else if (TextUtils.isEmpty(textMobile)) {
                     Toast.makeText(RegisterActivity.this, "Please enter your mobile no.", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("Mobile no. is required");
-                } else if (textMobile.length() != 9) {
+                } if (textMobile.length() != 9) { // Duhet të jetë 10 karaktere (përfshirë numrin 0 në fillim)
                     Toast.makeText(RegisterActivity.this, "Please re-enter your mobile no.", Toast.LENGTH_LONG).show();
-                    editTextRegisterMobile.setError("mobile No. should be 9 digits");
+                    editTextRegisterMobile.setError("Mobile No. should be 9 digits");
                     editTextRegisterMobile.requestFocus();
-                } else if (!mobileMatcher.matches()){
+                } else if (!mobileMatcher.matches()) { // Kontrollon përputhjen me regex
                     Toast.makeText(RegisterActivity.this, "Please re-enter your mobile no.", Toast.LENGTH_LONG).show();
-                    editTextRegisterMobile.setError("mobile No. is not valid");
+                    editTextRegisterMobile.setError("Mobile No. is not valid");
                     editTextRegisterMobile.requestFocus();
                 }
 
