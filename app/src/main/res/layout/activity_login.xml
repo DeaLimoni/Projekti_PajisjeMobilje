@@ -59,6 +59,12 @@
         android:textColor="#555555"
         android:textSize="16dp"/>
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:id="@+id/imageView_show_hide_pwd"
+            android:layout_below="@id/editText_login_pwd"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,6 +72,7 @@
             android:layout_below="@id/textView_login_pwd"
             android:hint="Enter password"
             android:inputType="textPassword"
+            android:layout_marginStart="30dp"
             android:padding="6dp"
             android:textSize="16sp"
             android:background="@drawable/border"

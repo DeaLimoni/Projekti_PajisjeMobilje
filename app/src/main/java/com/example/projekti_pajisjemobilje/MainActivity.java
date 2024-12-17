@@ -17,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
+
+
         // Layout padding për sistemin
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -24,12 +29,9 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Vendos titullin e ActionBar-it
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Firebase App");
-        }
 
-        /*/ Hap aktivitetin e login-it
+
+        // Hap aktivitetin e login-it
         Button buttonLogin = findViewById(R.id.button_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
+
 
         // Hap aktivitetin e regjistrimit
         Button buttonRegister = findViewById(R.id.button_register);
