@@ -204,12 +204,12 @@ private DatePickerDialog picker;
                                             if (task.isSuccessful()) {
                                                 firebaseUser.sendEmailVerification();
                                                 Toast.makeText(RegisterActivity.this, "User registered successfully.Please verify your email", Toast.LENGTH_LONG).show();
-                                                /*/open the user profile after successful registration
+                                                //open the user profile after successful registration
                                                 Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                                                         | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
-                                                finish(); //to close register activity*/
+                                                finish(); //to close register
                                             } else {
                                                 Toast.makeText(RegisterActivity.this, "User registered failed.Please try again!", Toast.LENGTH_LONG).show();
 
