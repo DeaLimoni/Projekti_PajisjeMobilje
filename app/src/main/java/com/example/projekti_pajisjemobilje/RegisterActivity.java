@@ -149,13 +149,16 @@ public class RegisterActivity extends AppCompatActivity {
                             .setDisplayName(fullName).build();
                     firebaseUser.updateProfile(profileUpdates);
 
-                    ReadWriteUserDetails userDetails = new ReadWriteUserDetails(dob, gender, mobile);
+                    ReadWriteUserDetails writeuserDetails = new ReadWriteUserDetails(dob, gender, mobile);
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered Users");
-                    reference.child(firebaseUser.getUid()).setValue(userDetails).addOnCompleteListener(task1 -> {
+                    reference.child(firebaseUser.getUid()).setValue(writeuserDetails).addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             firebaseUser.sendEmailVerification();
                             Toast.makeText(this, "Registration successful. Verify your email.", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(this, LoginActivity.class));
+                            Intent intent= new Intent(RegisterActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK |
+                                    Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
                             finish();
                         } else {
                             Toast.makeText(this, "Failed to save user data. Try again.", Toast.LENGTH_SHORT).show();
