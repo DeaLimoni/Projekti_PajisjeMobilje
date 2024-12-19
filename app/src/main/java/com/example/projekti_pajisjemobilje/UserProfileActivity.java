@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -31,9 +32,8 @@ public class UserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         // Ensure ActionBar is set
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("User Profile");
+
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Home");
         }
@@ -45,7 +45,7 @@ public class UserProfileActivity extends AppCompatActivity {
         textViewDoB = findViewById(R.id.textView_show_dob);
         textViewMobile = findViewById(R.id.textView_show_mobile);
         textViewGender = findViewById(R.id.textView_show_gender);
-        progressBar = findViewById(R.id.progressBar1);
+        progressBar = findViewById(R.id.progressBar);
 
         // Firebase initialization
         authProfile = FirebaseAuth.getInstance();
@@ -66,16 +66,9 @@ public class UserProfileActivity extends AppCompatActivity {
         DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
         referenceProfile.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ReadWriteUserDetails readUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
                 if (readUserDetails != null) {
-                    fullName = firebaseUser.getDisplayName();
-                    email = firebaseUser.getEmail();
-                    doB = readUserDetails.doB;
-                    gender = readUserDetails.gender;
-                    mobile = readUserDetails.mobile;
-
-                    // Setting values to the TextViews
                     textViewWelcome.setText("Welcome, " + fullName + "!");
                     textViewFullName.setText(fullName);
                     textViewEmail.setText(email);
@@ -87,7 +80,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(UserProfileActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }

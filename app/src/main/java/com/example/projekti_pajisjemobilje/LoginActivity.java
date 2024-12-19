@@ -103,14 +103,14 @@ public class LoginActivity extends AppCompatActivity {
                 // Kontrollo nëse emaili është verifikuar
                 if (firebaseUser != null && firebaseUser.isEmailVerified()) {
                     Toast.makeText(LoginActivity.this, "You are logged in now!", Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
                     finish();
                 } else {
-                    if (firebaseUser != null) {
+
                         firebaseUser.sendEmailVerification();
                         authProfile.signOut();
-                    }
-                    showAlertDialog();
+                        showAlertDialog();
                 }
             } else {
                 try {

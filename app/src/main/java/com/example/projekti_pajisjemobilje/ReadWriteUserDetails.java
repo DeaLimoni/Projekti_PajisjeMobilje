@@ -4,11 +4,11 @@ public class ReadWriteUserDetails {
     public String  doB, gender, mobile;
     //constuctor
     public ReadWriteUserDetails(){};
-    public ReadWriteUserDetails( String textDoB, String textGender, String textMobile) {
+    public ReadWriteUserDetails(String doB, String gender, String mobile) {
 
-        this.doB = textDoB;
-        this.gender = textGender;
-        this.mobile = textMobile;
+        this.doB = doB;
+        this.gender = gender;
+        this.mobile = mobile;
 
     }
 }
