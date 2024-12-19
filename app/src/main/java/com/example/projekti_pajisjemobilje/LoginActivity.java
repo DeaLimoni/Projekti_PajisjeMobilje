@@ -177,7 +177,7 @@ authProfile = FirebaseAuth.getInstance();
         if(authProfile.getCurrentUser() !=null){
             Toast.makeText(LoginActivity.this, "Already loged in!", Toast.LENGTH_SHORT).show();
        //start the userprofileactiviy
-         startActivity(new Intent(LoginActivity.this, UserPtofileActivity.class));
+         startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
         finish();
         }else{
             Toast.makeText(LoginActivity.this, "You can login now", Toast.LENGTH_SHORT).show();

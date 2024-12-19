@@ -48,8 +48,8 @@
 
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/ic_profile"
         android:background="@drawable/ic_profile"/>
 
@@ -74,12 +74,13 @@
 
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/ic_email"
         android:background="@drawable/ic_email"
         android:layout_below="@+id/divider_name"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/textView_show_full_name"
+        android:layout_below="@+id/textView_show_email"
         android:background="@android:color/darker_gray"
         android:id="@+id/divider_email"/>
 
@@ -107,7 +108,7 @@
         android:id="@+id/ic_dob"
         android:background="@drawable/ic_birthday"
         android:layout_below="@+id/divider_email"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -125,7 +126,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/textView_show_full_name"
+        android:layout_below="@+id/textView_show_email"
         android:background="@android:color/darker_gray"
         android:id="@+id/divider_dob"/>
 
