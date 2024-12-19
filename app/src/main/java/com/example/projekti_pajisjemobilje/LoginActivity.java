@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser firebaseUser = authProfile.getCurrentUser();
 
                 // Kontrollo nëse emaili është verifikuar
-                if (firebaseUser != null && firebaseUser.isEmailVerified()) {
+                if (firebaseUser.isEmailVerified()) {
                     Toast.makeText(LoginActivity.this, "You are logged in now!", Toast.LENGTH_SHORT).show();
 
                     startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
@@ -137,12 +137,15 @@ public class LoginActivity extends AppCompatActivity {
         builder.setTitle("Email not verified!");
         builder.setMessage("Please verify your email now. You cannot log in without email verification.");
 
-        builder.setPositiveButton("Continue", (dialog, which) -> {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_APP_EMAIL);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        });
+        builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        } );
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
