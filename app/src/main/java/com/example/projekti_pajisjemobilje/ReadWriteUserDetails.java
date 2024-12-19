@@ -7,7 +7,7 @@ public class ReadWriteUserDetails {
     public ReadWriteUserDetails() {
     };
 
-    ;
+
 
     public ReadWriteUserDetails( String textdoB, String textgender, String textmobile) {
 
