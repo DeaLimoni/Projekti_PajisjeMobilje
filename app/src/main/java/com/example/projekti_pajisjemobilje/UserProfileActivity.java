@@ -94,7 +94,7 @@ public class UserProfileActivity extends AppCompatActivity {
         String userID = firebaseUser.getUid();
 
         // Get reference to the "User" node in Firebase
-        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered User");
         referenceProfile.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
