@@ -150,26 +150,32 @@ public class RegisterActivity extends AppCompatActivity {
                     firebaseUser.updateProfile(profileUpdates);
 
                     ReadWriteUserDetails writeuserDetails = new ReadWriteUserDetails(dob, gender, mobile);
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered Users");
-                    reference.child(firebaseUser.getUid()).setValue(writeuserDetails).addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful()) {
-                            firebaseUser.sendEmailVerification();
-                            Toast.makeText(this, "Registration successful. Verify your email.", Toast.LENGTH_LONG).show();
-                            Intent intent= new Intent(RegisterActivity.this, LoginActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK |
-                                    Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(this, "Failed to save user data. Try again.", Toast.LENGTH_SHORT).show();
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+                    reference.child(firebaseUser.getUid()).setValue(writeuserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+
+                                firebaseUser.sendEmailVerification();
+                                Toast.makeText(RegisterActivity.this, "Registration successful. Verify your email.", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Failed to save user data. Try again.", Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
+                            }
+
                         }
                     });
+                } else {
+                    handleRegistrationError(task.getException());
                 }
-            } else {
-                handleRegistrationError(task.getException());
             }
         });
     }
+
 
     private void handleRegistrationError(Exception exception) {
         if (exception instanceof FirebaseAuthWeakPasswordException) {
@@ -182,5 +188,6 @@ public class RegisterActivity extends AppCompatActivity {
             Log.e(TAG, exception.getMessage());
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
         }
+        progressBar.setVisibility(View.GONE);
     }
 }

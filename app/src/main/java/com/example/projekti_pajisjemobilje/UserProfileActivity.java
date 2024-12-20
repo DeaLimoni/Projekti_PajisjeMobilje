@@ -94,7 +94,7 @@ public class UserProfileActivity extends AppCompatActivity {
         String userID = firebaseUser.getUid();
 
         // Get reference to the "Registered User" node in Firebase
-        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered User");
+        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Users");
         referenceProfile.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,12 +106,14 @@ public class UserProfileActivity extends AppCompatActivity {
                 gender= readUserDetails.gender;
                 mobile= readUserDetails.mobile;
 
-textViewWelcome.setText("Welxome" + fullName + "!");
-textViewFullName.setText(fullName);
-textViewEmail.setText(email);
-textViewDoB.setText(doB);
-textViewGender.setText(gender);
-textViewMobile.setText(mobile);
+                   textViewWelcome.setText("Welcome" + fullName + "!");
+                   textViewFullName.setText(fullName);
+                   textViewEmail.setText(email);
+                   textViewDoB.setText(doB);
+                   textViewGender.setText(gender);
+                   textViewMobile.setText(mobile);
+                }else {
+                    Toast.makeText(UserProfileActivity.this, "No user data found in Firebase!", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE); // Hide the progress bar after data is loaded
             }
