@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        // Hap aktivitetin e login-it
+
         Button buttonLogin = findViewById(R.id.button_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override

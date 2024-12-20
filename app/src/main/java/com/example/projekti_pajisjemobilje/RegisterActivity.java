@@ -150,42 +150,22 @@ public class RegisterActivity extends AppCompatActivity {
                     firebaseUser.updateProfile(profileUpdates);
 
                     ReadWriteUserDetails writeuserDetails = new ReadWriteUserDetails(dob, gender, mobile);
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered User");
-                    reference.child(firebaseUser.getUid()).setValue(writeuserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
+                    referenceProfile.child(firebaseUser.getUid()).setValue(writeuserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                FirebaseUser firebaseUser =auth.getCurrentUser();
-
                                 firebaseUser.sendEmailVerification();
 
-                                ReadWriteUserDetails writeuserDetails = new ReadWriteUserDetails(dob, gender, mobile);
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered Users");
-                                reference.child(firebaseUser.getUid()).setValue(writeuserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                       if(task.isSuccessful()) {
-                                           firebaseUser.sendEmailVerification();
-                                           Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                           Toast.makeText(RegisterActivity.this, "Registration successful. Verify your email.", Toast.LENGTH_LONG).show();
-                                           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                           startActivity(intent);
-                                           finish();
-
-
-                                       }else{  Toast.makeText(RegisterActivity.this,"User registered failed! Try again.", Toast.LENGTH_SHORT).show();
-                                         progressBar.setVisibility(View.GONE);
-                                       }
-
-
-                                    }
-                                });
-
+                                Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
+                                Toast.makeText(RegisterActivity.this, "Registration successful. Verify your email.", Toast.LENGTH_LONG).show();
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Failed to save user data. Try again.", Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                             }
-
                         }
                     });
                 } else {
@@ -194,7 +174,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void handleRegistrationError(Exception exception) {
         if (exception instanceof FirebaseAuthWeakPasswordException) {

@@ -1,8 +1,11 @@
-package com.example.projekti_pajisjemobilje;
+
+        package com.example.projekti_pajisjemobilje;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -64,9 +67,9 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void checkIfEmailVerified(FirebaseUser firebaseUser) {
-   if(firebaseUser.isEmailVerified()){
-       showAlertDialog();
-   }
+        if(firebaseUser.isEmailVerified()){
+            showAlertDialog();
+        }
 
     }
 
@@ -100,20 +103,21 @@ public class UserProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ReadWriteUserDetails readUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
                 if (readUserDetails != null) {
-                 fullName = firebaseUser.getDisplayName();
-                 email = firebaseUser.getEmail() ;
-                doB = readUserDetails.doB;
-                gender= readUserDetails.gender;
-                mobile= readUserDetails.mobile;
+                    fullName = firebaseUser.getDisplayName();
+                    email = firebaseUser.getEmail() ;
+                    doB = readUserDetails.dob;
+                    gender= readUserDetails.gender;
+                    mobile= readUserDetails.mobile;
 
-                   textViewWelcome.setText("Welcome" + fullName + "!");
-                   textViewFullName.setText(fullName);
-                   textViewEmail.setText(email);
-                   textViewDoB.setText(doB);
-                   textViewGender.setText(gender);
-                   textViewMobile.setText(mobile);
+                    textViewWelcome.setText("Welcome" + fullName + "!");
+                    textViewFullName.setText(fullName);
+                    textViewEmail.setText(email);
+                    textViewDoB.setText(doB);
+                    textViewGender.setText(gender);
+                    textViewMobile.setText(mobile);
+
                 }else {
-                    Toast.makeText(UserProfileActivity.this, "No user data found in Firebase!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserProfileActivity.this, "User data not available", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE); // Hide the progress bar after data is loaded
             }
@@ -125,5 +129,48 @@ public class UserProfileActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE); // Hide the progress bar in case of error
             }
         });
+    }
+
+    //creating acitonbar menu
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.common_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id= item.getItemId();
+        if(id==R.id.menu_refresh){
+            startActivity(getIntent());
+            finish();
+            overridePendingTransition(0,0);
+        }/* else if (id==R.id.menu_update_profile) {
+           Intent intent= new Intent(UserProfileActivity.this, UpdateProfileActivity.class);
+startActivity(intent);
+       }else if(id==R.id.menu_update_email){
+           Intent intent= new Intent(UserProfileActivity.this, UpdateEmailActivity.class);
+      startActivity(intent);
+       }else if(id==R.id.menu_settings){
+           Toast.makeText(UserProfileActivity.this, "menu_settings", Toast.LENGTH_SHORT).show();
+          }else if(id==R.id.menu_change_password){
+           Intent intent= new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
+           startActivity(intent);
+       }else if(id==R.id.menu_delete_profile){
+           Intent intent= new Intent(UserProfileActivity.this, DeleteProfileActivity.class);
+           startActivity(intent);
+       }*/else if(id==R.id.menu_logout){
+            authProfile.signOut();
+            Toast.makeText(UserProfileActivity.this,"Logged Out", Toast.LENGTH_SHORT).show();
+            Intent intent= new Intent(UserProfileActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }else{
+            Toast.makeText(UserProfileActivity.this,"Something went wrong", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
