@@ -4,8 +4,7 @@ public class ReadWriteUserDetails {
     public String doB, gender, mobile;
 
     //constuctor
-    public ReadWriteUserDetails() {
-    };
+    public ReadWriteUserDetails() {}
 
 
 

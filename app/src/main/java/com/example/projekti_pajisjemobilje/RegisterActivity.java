@@ -150,18 +150,37 @@ public class RegisterActivity extends AppCompatActivity {
                     firebaseUser.updateProfile(profileUpdates);
 
                     ReadWriteUserDetails writeuserDetails = new ReadWriteUserDetails(dob, gender, mobile);
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered User");
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered Users");
                     reference.child(firebaseUser.getUid()).setValue(writeuserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+                                FirebaseUser firebaseUser =auth.getCurrentUser();
 
                                 firebaseUser.sendEmailVerification();
-                                Toast.makeText(RegisterActivity.this, "Registration successful. Verify your email.", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
+
+                                ReadWriteUserDetails writeuserDetails = new ReadWriteUserDetails(dob, gender, mobile);
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered Users");
+                                reference.child(firebaseUser.getUid()).setValue(writeuserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                       if(task.isSuccessful()) {
+                                           firebaseUser.sendEmailVerification();
+                                           Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                           Toast.makeText(RegisterActivity.this, "Registration successful. Verify your email.", Toast.LENGTH_LONG).show();
+                                           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                           startActivity(intent);
+                                           finish();
+
+
+                                       }else{  Toast.makeText(RegisterActivity.this,"User registered failed! Try again.", Toast.LENGTH_SHORT).show();
+                                         progressBar.setVisibility(View.GONE);
+                                       }
+
+
+                                    }
+                                });
+
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Failed to save user data. Try again.", Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
