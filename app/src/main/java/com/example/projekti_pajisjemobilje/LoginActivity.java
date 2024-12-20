@@ -107,10 +107,12 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
                     finish();
                 } else {
-
+                    //
+                    if (firebaseUser != null) {
                         firebaseUser.sendEmailVerification();
-                        authProfile.signOut();
-                        showAlertDialog();
+                    }
+                    authProfile.signOut();
+                    showAlertDialog();
                 }
             } else {
                 try {
