@@ -150,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
                     firebaseUser.updateProfile(profileUpdates);
 
                     ReadWriteUserDetails writeuserDetails = new ReadWriteUserDetails(dob, gender, mobile);
-                    DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
+                    DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Userat");
                     referenceProfile.child(firebaseUser.getUid()).setValue(writeuserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
