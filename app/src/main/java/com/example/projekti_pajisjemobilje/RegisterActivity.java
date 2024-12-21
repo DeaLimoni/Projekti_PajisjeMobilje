@@ -208,8 +208,7 @@ picker.show();
 
                                Toast.makeText(RegisterActivity.this, "User registered succesfully. Please verify your email", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK|
-                                    Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
                             startActivity(intent);
                             finish();
 
