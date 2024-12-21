@@ -192,7 +192,7 @@ picker.show();
                 if (task.isSuccessful()) {
                     Toast.makeText(RegisterActivity.this, "User registered succesfully", Toast.LENGTH_LONG).show();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
-                    
+
                     firebaseUser.sendEmailVerification();
 
                     Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
