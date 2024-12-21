@@ -190,16 +190,39 @@ picker.show();
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "User registered succesfully", Toast.LENGTH_LONG).show();
+
                     FirebaseUser firebaseUser = auth.getCurrentUser();
 
-                    firebaseUser.sendEmailVerification();
+                    UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(textFullName).build();
+                    firebaseUser.updateProfile(profileChangeRequest);
+                    //enter user data into the database
+                    ReadWriteUserDetails writeUserDetails =new ReadWriteUserDetails(textDoB, textGender, textMobile);
+                    //extracting user
+                    DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
+                    referenceProfile.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                           if(task.isSuccessful()){
+                               firebaseUser.sendEmailVerification();
 
-                    Intent intent = new Intent(RegisterActivity.this, UserProfileActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK|
-                            Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    finish();
+
+                               Toast.makeText(RegisterActivity.this, "User registered succesfully. Please verify your email", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK|
+                                    Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+
+                           }else{
+                               Toast.makeText(RegisterActivity.this, "User registered failed. Please try again", Toast.LENGTH_LONG).show();
+
+                           }
+                            progressBar.setVisibility(View.GONE);
+
+                        }
+                    });
+
+
                 } else {
                     try {
                         throw task.getException();
@@ -216,7 +239,7 @@ picker.show();
                         Log.e(TAG, e.getMessage());
                         Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });

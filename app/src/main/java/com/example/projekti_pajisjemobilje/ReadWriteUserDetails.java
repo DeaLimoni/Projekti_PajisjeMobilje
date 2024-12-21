@@ -1,42 +1,19 @@
 package com.example.projekti_pajisjemobilje;
 
 public class ReadWriteUserDetails {
-    public String dob, gender, mobile;
+    public String doB, gender, mobile;
 
     public ReadWriteUserDetails() {
 
     }
 
-    public ReadWriteUserDetails(String dob, String gender, String mobile) {
-        this.dob = dob;
-        this.gender = gender;
-        this.mobile = mobile;
+    public ReadWriteUserDetails(  String textDoB, String textGender, String textMobile) {
+        this.doB = textDoB;
+        this.gender = textGender;
+        this.mobile = textMobile;
     }
 
-    // Getters and Setters
-    public String getDob() {
-        return dob;
-    }
 
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
 }
 
 

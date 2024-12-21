@@ -97,7 +97,7 @@ public class UserProfileActivity extends AppCompatActivity {
         String userID = firebaseUser.getUid();
 
         // Get reference to the "User" node in Firebase
-        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Userat");
+        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
         referenceProfile.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -105,11 +105,11 @@ public class UserProfileActivity extends AppCompatActivity {
                 if (readUserDetails != null) {
                     fullName = firebaseUser.getDisplayName();
                     email = firebaseUser.getEmail() ;
-                    doB = readUserDetails.dob;
+                    doB = readUserDetails.doB;
                     gender= readUserDetails.gender;
                     mobile= readUserDetails.mobile;
 
-                    textViewWelcome.setText("Welcome" + fullName + "!");
+                    textViewWelcome.setText("Welcome" +" "+ fullName + "!");
                     textViewFullName.setText(fullName);
                     textViewEmail.setText(email);
                     textViewDoB.setText(doB);
