@@ -41,8 +41,16 @@ public class LoginActivity extends AppCompatActivity {
 
         // Kontrolloni nëse përdoruesi është tashmë i kyçur dhe kaloni te UserProfileActivity nëse është
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
-            finish(); // Mbyll LoginActivity që të mos mund të ktheheni përsëri
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (firebaseUser.isEmailVerified()) {
+                // Përdoruesi është i kyçur dhe email-i është verifikuar, kaloni në UserProfileActivity
+                startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
+                finish(); // Mbyll LoginActivity që të mos mund të ktheheni përsëri
+            } else {
+                // Përdoruesi është i kyçur, por email-i nuk është verifikuar, bëj logout dhe kërko verifikimin
+                authProfile.signOut();
+                showAlertDialog();
+            }
         }
 
         if (getSupportActionBar() != null) {
