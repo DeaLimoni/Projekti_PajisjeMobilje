@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,8 +24,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -144,7 +149,32 @@ private ProgressBar progressBar;
                       String userID= firebaseUser.getUid();
                     progressBar.setVisibility(View.VISIBLE);
 
-referenceProfile.
+referenceProfile.child(userID).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+    @Override
+    public void onComplete(@NonNull Task<Void> task) {
+        if(task.isSuccessful()){
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().
+            setDisplayName(textFullName).build();
+            firebaseUser.updateProfile(profileUpdates);
+
+            Toast.makeText(UpdateProfileActivity.this, "Update Sucessful!", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(UpdateProfileActivity.this, UserProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+            | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }else{
+            try {
+                throw task.getException();
+            } catch(Exception e){
+                Toast.makeText(UpdateProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        }
+        progressBar.setVisibility(View.GONE);
+    }
+});
                 }
             }
         });
@@ -191,4 +221,49 @@ referenceProfile.
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.common_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id= item.getItemId();
+        if(id==R.id.menu_refresh) {
+            startActivity(getIntent());
+            finish();
+            overridePendingTransition(0, 0);
+        }else if (id==R.id.menu_update_profile) {
+            Intent intent = new Intent(UpdateProfileActivity.this, UpdateProfileActivity.class);
+            startActivity(intent);
+            finish();
+        } /*}else if(id==R.id.menu_update_email){
+           Intent intent= new Intent(UserProfileActivity.this, UpdateEmailActivity.class);
+      startActivity(intent);
+       }else if(id==R.id.menu_settings){
+           Toast.makeText(UserProfileActivity.this, "menu_settings", Toast.LENGTH_SHORT).show();
+          }else if(id==R.id.menu_change_password){
+           Intent intent= new Intent(UserProfileActivity.this, ChangePasswordActivity.class);
+           startActivity(intent);
+       }else if(id==R.id.menu_delete_profile){
+           Intent intent= new Intent(UserProfileActivity.this, DeleteProfileActivity.class);
+           startActivity(intent);
+       }*/else if(id==R.id.menu_logout){
+            authProfile.signOut();
+            Toast.makeText(UpdateProfileActivity.this,"Logged Out", Toast.LENGTH_LONG).show();
+            Intent intent= new Intent(UpdateProfileActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }else{
+            Toast.makeText(UpdateProfileActivity.this,"Something went wrong", Toast.LENGTH_LONG).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
 }
