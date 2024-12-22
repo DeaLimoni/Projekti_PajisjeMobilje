@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText_update_profile_name"
-            android:layout_below="@id/editText_update_profile_name"
+            android:layout_below="@id/textView_update_profile_name"
             android:background="@drawable/border"
             android:inputType="textPersonName"
             android:padding="6dp"
@@ -133,18 +133,37 @@
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
         android:layout_below="@id/editText_update_profile_mobile"
-        android:backgroundTint="@color/lime"
+        android:backgroundTint="@color/lime"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button_profile_update_email"
             android:text="Update email"
-          
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
-            android:layout_below="@id/editText_update_profile_mobile"
-            android:backgroundTint="@color/lime"
+            android:layout_below="@id/button_upload_profile_pic"
+            android:backgroundTint="@color/lime"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_update_profile"
+            android:text="Update profile"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_below="@id/button_profile_update_email"
+            android:backgroundTint="@color/lime"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:elevation="10dp"
+            android:visibility="gone" />
 
     </RelativeLayout>
     
