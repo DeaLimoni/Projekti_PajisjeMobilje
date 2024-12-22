@@ -41,16 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 
         // Kontrolloni nëse përdoruesi është tashmë i kyçur dhe kaloni te UserProfileActivity nëse është
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            if (firebaseUser.isEmailVerified()) {
-                // Përdoruesi është i kyçur dhe email-i është verifikuar, kaloni në UserProfileActivity
-                startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
-                finish(); // Mbyll LoginActivity që të mos mund të ktheheni përsëri
-            } else {
-                // Përdoruesi është i kyçur, por email-i nuk është verifikuar, bëj logout dhe kërko verifikimin
-                authProfile.signOut();
-                showAlertDialog();
-            }
+            startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
+            finish(); // Mbyll LoginActivity që të mos mund të ktheheni përsëri
         }
 
         if (getSupportActionBar() != null) {
@@ -87,8 +79,11 @@ buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
 
         // Login User
         Button buttonLogin = findViewById(R.id.button_login);
-        buttonLogin.setOnClickListener(v -> {
-            String textEmail = editTextLoginEmail.getText().toString();
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String textEmail = editTextLoginEmail.getText().toString();
             String textPwd = editTextLoginPwd.getText().toString();
 
             if (TextUtils.isEmpty(textEmail)) {
@@ -107,7 +102,8 @@ buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
                 progressBar.setVisibility(View.VISIBLE);
                 loginUser(textEmail, textPwd);
             }
-        });
+        }
+    });
     }
 
     private void loginUser(String textEmail, String textPwd) {
@@ -173,7 +169,8 @@ buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
     @Override
     protected void onStart() {
         super.onStart();
-        if (authProfile.getCurrentUser() != null) {
+        FirebaseUser firebaseUser = authProfile.getCurrentUser();
+        if (firebaseUser != null) {
             Toast.makeText(LoginActivity.this, "You are already logged in!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
             finish();
