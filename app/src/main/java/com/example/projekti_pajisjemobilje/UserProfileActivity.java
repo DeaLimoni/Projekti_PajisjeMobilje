@@ -67,7 +67,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void checkIfEmailVerified(FirebaseUser firebaseUser) {
-        if(firebaseUser.isEmailVerified()){
+        if(!firebaseUser.isEmailVerified()){
             showAlertDialog();
         }
 
@@ -163,13 +163,13 @@ startActivity(intent);
            startActivity(intent);
        }*/else if(id==R.id.menu_logout){
             authProfile.signOut();
-            Toast.makeText(UserProfileActivity.this,"Logged Out", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserProfileActivity.this,"Logged Out", Toast.LENGTH_LONG).show();
             Intent intent= new Intent(UserProfileActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         }else{
-            Toast.makeText(UserProfileActivity.this,"Something went wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserProfileActivity.this,"Something went wrong", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
     }

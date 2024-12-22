@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
@@ -39,15 +40,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Kontrolloni nëse përdoruesi është tashmë i kyçur dhe kaloni te UserProfileActivity nëse është
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
-            finish(); // Mbyll LoginActivity që të mos mund të ktheheni përsëri
-        }
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Login");
-        }
+            ActionBar actionBar = getSupportActionBar();
+            if(actionBar!=null){
+                actionBar.setTitle("Login");
+            }
+
 
         editTextLoginEmail = findViewById(R.id.editText_login_email);
         editTextLoginPwd = findViewById(R.id.editText_login_pwd);
