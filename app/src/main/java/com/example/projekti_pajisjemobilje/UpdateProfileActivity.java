@@ -3,6 +3,8 @@ package com.example.projekti_pajisjemobilje;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,6 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UpdateProfileActivity extends AppCompatActivity {
 private EditText editTextUpdateName, editTextUpdateDoB,editTextUpdateMobile;
@@ -46,17 +50,17 @@ private ProgressBar progressBar;
         if (actionBar != null) {
             actionBar.setTitle("Update Profile");
         }
-      progressBar = findViewById(R.id.progressBar);
-      editTextUpdateName= findViewById(R.id.editText_update_profile_name);
-      editTextUpdateDoB = findViewById(R.id.editText_update_profile_dob);
-      editTextUpdateMobile=findViewById(R.id.editText_update_profile_mobile);
+        progressBar = findViewById(R.id.progressBar);
+        editTextUpdateName = findViewById(R.id.editText_update_profile_name);
+        editTextUpdateDoB = findViewById(R.id.editText_update_profile_dob);
+        editTextUpdateMobile = findViewById(R.id.editText_update_profile_mobile);
 
-      radioGroupUpdateGender =findViewById(R.id.radio_group_update_gender);
-       authProfile= FirebaseAuth.getInstance();
+        radioGroupUpdateGender = findViewById(R.id.radio_group_update_gender);
+        authProfile = FirebaseAuth.getInstance();
 
-        FirebaseUser firebaseUser= authProfile.getCurrentUser();
+        FirebaseUser firebaseUser = authProfile.getCurrentUser();
 
-      showProfile(firebaseUser);
+        showProfile(firebaseUser);
 
       /*/Update Email
         Button buttonUpdateEmail = findViewById(R.id.button_profile_update_email);
@@ -73,7 +77,7 @@ private ProgressBar progressBar;
             @Override
             public void onClick(View v) {
 
-                String textSADoB[]=textDoB.split("/");
+                String textSADoB[] = textDoB.split("/");
 
                 int day = Integer.parseInt(textSADoB[0]);
                 int month = Integer.parseInt(textSADoB[1]) - 1;
@@ -82,22 +86,70 @@ private ProgressBar progressBar;
                 picker = new DatePickerDialog(UpdateProfileActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        editTextUpdateDoB.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+                        editTextUpdateDoB.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
-                },year,month,day);
+                }, year, month, day);
                 picker.show();
             }
         });
-        Button buttonUpdateProfile= findViewById(R.id.button_update_profile);
+        Button buttonUpdateProfile = findViewById(R.id.button_update_profile);
         buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateProfile(firebaseUser);
 
             }
-        });
 
+            private void updateProfile(FirebaseUser firebaseUser) {
+                int selectedGenderID = radioGroupUpdateGender.getCheckedRadioButtonId();
+                radioButtonUpdateGenderSelected = findViewById(selectedGenderID);
+                String mobileRegex = "0[0-9]{8}";
+                Matcher mobileMatcher;
+                Pattern mobilePattern = Pattern.compile(mobileRegex);
+                mobileMatcher = mobilePattern.matcher(textMobile);
+                // Validation checks
+                if (TextUtils.isEmpty(textFullName)) {
+                    Toast.makeText(UpdateProfileActivity.this, "Please enter your full name", Toast.LENGTH_LONG).show();
+                    editTextUpdateName.setError("Full Name is required");
+                    editTextUpdateName.requestFocus();
+                } else if (TextUtils.isEmpty(textDoB)) {
+                    Toast.makeText(UpdateProfileActivity.this, "Please enter your date of birth", Toast.LENGTH_LONG).show();
+                    editTextUpdateDoB.setError("Date of birth is required");
+                    editTextUpdateDoB.requestFocus();
+                } else if (TextUtils.isEmpty(radioButtonUpdateGenderSelected.getText())) {
+                    Toast.makeText(UpdateProfileActivity.this, "Please select your gender ", Toast.LENGTH_LONG).show();
+                    radioButtonUpdateGenderSelected.setError("Gender is required");
+                    radioButtonUpdateGenderSelected.requestFocus();
+                } else if (TextUtils.isEmpty(textMobile)) {
+                    Toast.makeText(UpdateProfileActivity.this, "Please enter your mobile number", Toast.LENGTH_LONG).show();
+                    editTextUpdateMobile.setError("Mobile number is required");
+                    editTextUpdateMobile.requestFocus();
+                } else if (textMobile.length() != 9) {
+                    Toast.makeText(UpdateProfileActivity.this, "Please re-enter your mobile number", Toast.LENGTH_LONG).show();
+                    editTextUpdateMobile.setError("Mobile number is not valid");
+                    editTextUpdateMobile.requestFocus();
+                } else if (!mobileMatcher.find()) {
+                    Toast.makeText(UpdateProfileActivity.this, "Please re-enter your mobile number", Toast.LENGTH_LONG).show();
+                    editTextUpdateMobile.setError("Mobile number should be 9 digits");
+                    editTextUpdateMobile.requestFocus();
+
+                } else {
+                    textGender = radioButtonUpdateGenderSelected.getText().toString();
+                    textFullName = editTextUpdateName.getText().toString();
+                     textDoB= editTextUpdateDoB.getText().toString();
+                     textMobile= editTextUpdateMobile.getText().toString();
+
+                     ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textDoB,textGender, textMobile);
+                      DatabaseReference referenceProfile= FirebaseDatabase.getInstance().getReference("Registered Users");
+                      String userID= firebaseUser.getUid();
+                    progressBar.setVisibility(View.VISIBLE);
+
+referenceProfile.
+                }
+            }
+        });
     }
+
 
     private void showProfile(FirebaseUser firebaseUser) {
    String userIDofRegistered = firebaseUser.getUid();
