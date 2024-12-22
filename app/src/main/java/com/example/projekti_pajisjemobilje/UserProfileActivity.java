@@ -50,6 +50,18 @@ public class UserProfileActivity extends AppCompatActivity {
         textViewMobile = findViewById(R.id.textView_show_mobile);
         progressBar = findViewById(R.id.progressBar);
 
+        //set onclicklistener
+        imageView = findViewById(R.id.imageView_profile_dp);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserProfileActivity.this, UploadProfilePicActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
         // Firebase initialization
         authProfile = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = authProfile.getCurrentUser();
@@ -147,10 +159,10 @@ public class UserProfileActivity extends AppCompatActivity {
             startActivity(getIntent());
             finish();
             overridePendingTransition(0,0);
-        }/* else if (id==R.id.menu_update_profile) {
+        } else if (id==R.id.menu_update_profile) {
            Intent intent= new Intent(UserProfileActivity.this, UpdateProfileActivity.class);
 startActivity(intent);
-       }else if(id==R.id.menu_update_email){
+       }/*else if(id==R.id.menu_update_email){
            Intent intent= new Intent(UserProfileActivity.this, UpdateEmailActivity.class);
       startActivity(intent);
        }else if(id==R.id.menu_settings){
