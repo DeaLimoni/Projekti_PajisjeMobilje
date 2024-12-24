@@ -85,8 +85,18 @@ public class UserProfileActivity extends AppCompatActivity {
     private void swipeToRefresh() {
         swipeContainer = findViewById(R.id.swipeContainer);
 
-        swipeContainer.setOnRefreshListener();
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startActivity(getIntent());
+                finish();
+                overridePendingTransition(0,0);
+                swipeContainer.setRefreshing(false);
 
+            }
+        });
+         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,android.R.color.holo_orange_light,
+                 android.R.color.holo_red_light);
 
     }
 

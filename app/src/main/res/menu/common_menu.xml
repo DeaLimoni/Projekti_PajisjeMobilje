@@ -4,8 +4,7 @@
 <item android:title ="Refresh"
     android:icon="@drawable/ic_refresh_whitee"
     android:alphabeticShortcut="r"
-    android:orderInCategory="1"
-    app:showAsAction="ifRoom"
+
     android:id="@+id/menu_refresh"
     />
 
