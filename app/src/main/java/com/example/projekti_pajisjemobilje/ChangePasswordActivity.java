@@ -69,7 +69,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         if(firebaseUser.equals("")){
             Toast.makeText(ChangePasswordActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent((ChangePasswordActivity.this, UserProfileActivity.class));
+            Intent intent = new Intent(ChangePasswordActivity.this, UserProfileActivity.class);
             startActivity(intent);
             finish();
         }else {
@@ -85,11 +85,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
        public void onClick(View v) {
            userPwdCurr = editTextpwdCurr.getText().toString();
 
-           if(TextUtils.isEmpty((userPwdCurr)){
+           if (TextUtils.isEmpty(userPwdCurr)) {
                Toast.makeText(ChangePasswordActivity.this, "Password is needed", Toast.LENGTH_SHORT).show();
          editTextpwdCurr.setError("Please enter your current password to authenticate");
          editTextpwdCurr.requestFocus();
-           } else {
+           }
+            else {
                progressBar.setVisibility(View.VISIBLE);
                AuthCredential credential = EmailAuthProvider.getCredential(firebaseUser.getEmail(),userPwdCurr);
 
@@ -114,16 +115,69 @@ public class ChangePasswordActivity extends AppCompatActivity {
                       buttonChangePwd.setOnClickListener(new View.OnClickListener() {
                           @Override
                           public void onClick(View v) {
-                              chan
+                              changePwd(firebaseUser);
                           }
                       });
+                       }else{
+                           try{
+                               throw task.getException();
+                           } catch (Exception e) {
+
+                               Toast.makeText(ChangePasswordActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                               
+                           }
                        }
+                       progressBar.setVisibility(View.GONE);
                    }
                });
 
            }
        }
    });
+    }
+
+    private void changePwd(FirebaseUser firebaseUser) {
+    String userPwdNew = editTextPwdNew.getText().toString().trim();
+    String userPwdConfirmNew = editTextPwdConfirmNew.getText().toString().trim();
+if(TextUtils.isEmpty(userPwdNew)){
+    Toast.makeText(ChangePasswordActivity.this, "New Password is needed", Toast.LENGTH_SHORT).show();
+     editTextPwdNew.setError("Please enter your new password");
+     editTextPwdNew.requestFocus();
+}else if(TextUtils.isEmpty(userPwdConfirmNew)) {
+            Toast.makeText(ChangePasswordActivity.this, "Please confirm your new password", Toast.LENGTH_SHORT).show();
+            editTextPwdConfirmNew.setError("Please re-enter your new password");
+            editTextPwdConfirmNew.requestFocus();
+
+        }else if(!userPwdNew.matches(userPwdConfirmNew)){
+    Toast.makeText(ChangePasswordActivity.this, "Password did not match", Toast.LENGTH_SHORT).show();
+    editTextPwdConfirmNew.setError("Please re-enter same password");
+    editTextPwdConfirmNew.requestFocus();
+        }else if(userPwdCurr.matches(userPwdNew)){
+    Toast.makeText(ChangePasswordActivity.this, "New password cannot be same as old password", Toast.LENGTH_SHORT).show();
+    editTextPwdNew.setError("Please enter a new password");
+    editTextPwdNew.requestFocus();
+        }else{
+    progressBar.setVisibility(View.VISIBLE);
+
+    firebaseUser.updatePassword(userPwdNew).addOnCompleteListener(new OnCompleteListener<Void>() {
+        @Override
+        public void onComplete(@NonNull Task<Void> task) {
+           if(task.isSuccessful()){
+               Toast.makeText(ChangePasswordActivity.this, "Password has been changed", Toast.LENGTH_SHORT).show();
+               Intent intent = new Intent(ChangePasswordActivity.this, UserProfileActivity.class);
+               startActivity(intent);
+               finish();
+           }else{
+               try{
+                   throw task.getException();
+               }catch(Exception e){
+                   Toast.makeText(ChangePasswordActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+               }
+           }
+           progressBar.setVisibility(View.GONE);
+        }
+    });
+        }
     }
 
     @Override
