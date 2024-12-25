@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/light_gray">
+    android:background="@color/purple_500">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -58,7 +58,7 @@
             android:layout_below="@id/textView_main_head"
             android:background="@android:color/holo_red_dark"
             android:text="Login"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             />
@@ -70,8 +70,7 @@
             android:layout_below="@id/button_login"
             android:text="Do not have an account?"
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:layout_marginBottom="5dp" />
+            />
 
         <TextView
             android:id="@+id/textView_register_link"
@@ -81,6 +80,7 @@
             android:text="@string/register"
             android:textAlignment="center"
             android:textColor="@color/purple_700"
-            android:textSize="16sp"/>
+
+           />
     </RelativeLayout>
 </ScrollView>

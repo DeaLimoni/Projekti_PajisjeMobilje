@@ -1,63 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:background="@color/light_gray">
+    android:id="@+id/swipeContainer">
 
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_margin="15dp"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        tools:context=".LoginActivity"
+        android:background="@color/light_gray">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:background="@color/purple_500">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView_login_head"
             android:layout_marginTop="30dp"
-            android:text="Please enter your credentials to login"
+            android:text="Welcome Back!"
+            android:textColor="@color/white"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_login_email"
-            android:layout_marginTop="50dp"
-            android:layout_below="@+id/textView_login_head"
-            android:text="Email*"
+            android:id="@+id/textView_login_instruction"
+
+            android:text="Please log in to continue"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"/>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:padding="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/border">
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/RL_email"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/border">
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/imageViewEmail"
+        android:src="@drawable/ic_email"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_login_email"
+        android:text="Email*"
+        android:padding="6dp"
+      android:layout_toEndOf="@+id/imageViewEmail"/>
+    <View
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:id="@+id/divider_email"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView_login_email"
+        android:background="@android:color/darker_gray"/>
+
+
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_login_email"
+        android:layout_below="@id/textView_login_email"
+        android:hint="Enter email"
+        android:inputType="textEmailAddress"
+        android:padding="6dp"
+        android:textSize="16sp"
+        android:background="@android:color/transparent"
+android:layout_toEndOf="@id/imageViewEmail"
+        />
+</RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_login_pwd"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/RL_email"
+            android:text="Password*"
             android:padding="6dp"
             android:textColor="#555555"
             android:textSize="16dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_login_email"
-            android:layout_below="@id/textView_login_email"
-            android:hint="Enter email"
-            android:inputType="textEmailAddress"
-            android:padding="6dp"
-            android:textSize="16sp"
-            android:background="@drawable/border"
-            />
-
-        <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_login_pwd"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/editText_login_email"
-        android:text="Password*"
-            android:padding="6dp"
-        android:textColor="#555555"
-        android:textSize="16dp"/>
 
         <ImageView
             android:id="@+id/imageView_show_hide_pwd"
@@ -114,4 +170,11 @@
             android:visibility="gone"/>
     </RelativeLayout>
 
+</LinearLayout>
+
+
+
+
+
 </ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
