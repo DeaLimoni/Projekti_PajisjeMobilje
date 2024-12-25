@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UpdateProfileActivity"
-    android:background="@color/light_gray">
+    android:background="@color/purple_500">
 
 
 
@@ -133,9 +133,12 @@
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
         android:layout_below="@id/editText_update_profile_mobile"
+        android:background="@color/purple_500"
         />
 
         <Button
+            android:background="@color/purple_500"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button_profile_update_email"
@@ -145,6 +148,8 @@
             android:layout_below="@id/button_upload_profile_pic" />
 
         <Button
+            android:layout_marginTop="10dp"
+            android:background="@color/purple_500"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button_update_profile"

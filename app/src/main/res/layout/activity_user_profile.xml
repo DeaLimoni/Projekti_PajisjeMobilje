@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".UserProfileActivity"
-        android:background="@color/light_gray">
+        android:background="@color/purple_500">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,14 +21,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:background="#5CC09F">
+                android:background="@color/purple_500">
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
                     android:id="@+id/imageView_profile_dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/no_profilee_" />
+                    android:src="@drawable/no_profileee" />
 
                 <TextView
                     android:layout_width="wrap_content"
