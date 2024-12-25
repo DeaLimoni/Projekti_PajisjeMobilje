@@ -20,6 +20,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -55,6 +56,7 @@ private ProgressBar progressBar;
         if (actionBar != null) {
             actionBar.setTitle("Update Profile");
         }
+        actionBar.setDisplayHomeAsUpEnabled(true);
         progressBar = findViewById(R.id.progressBar);
         editTextUpdateName = findViewById(R.id.editText_update_profile_name);
         editTextUpdateDoB = findViewById(R.id.editText_update_profile_dob);
@@ -231,7 +233,10 @@ referenceProfile.child(userID).setValue(writeUserDetails).addOnCompleteListener(
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id= item.getItemId();
-        if(id==R.id.menu_refresh) {
+        if(id== android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(UpdateProfileActivity.this);
+        }
+       else if(id==R.id.menu_refresh) {
             startActivity(getIntent());
             finish();
             overridePendingTransition(0, 0);

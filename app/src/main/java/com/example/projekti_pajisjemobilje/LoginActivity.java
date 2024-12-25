@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             if(actionBar!=null){
                 actionBar.setTitle("Login");
             }
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         editTextLoginEmail = findViewById(R.id.editText_login_email);

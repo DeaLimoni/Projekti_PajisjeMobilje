@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -33,7 +35,11 @@ private FirebaseUser firebaseUser;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_profile_pic);
 
-        getSupportActionBar().setTitle("Upload Profile Picture");
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.setTitle("Upload Profile Pic");
+        }
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Button buttonUploadPicChoose = findViewById(R.id.upload_pic_choose_button);
         Button buttonUploadPic = findViewById(R.id.upload_pic_button);
@@ -55,7 +61,10 @@ private FirebaseUser firebaseUser;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id= item.getItemId();
-        if(id==R.id.menu_refresh) {
+        if(id== android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(UploadProfilePicActivity.this);
+        }
+       else if(id==R.id.menu_refresh) {
             startActivity(getIntent());
             finish();
             overridePendingTransition(0, 0);

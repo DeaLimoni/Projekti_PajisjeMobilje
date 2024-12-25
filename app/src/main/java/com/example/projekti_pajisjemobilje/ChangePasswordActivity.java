@@ -16,6 +16,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -51,6 +52,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
             actionBar.setTitle("Change Password");
 
         }
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
             editTextPwdNew = findViewById(R.id.editText_change_pwd_new);
             editTextpwdCurr = findViewById(R.id.editText_change_pwd_current);
             editTextPwdConfirmNew = findViewById(R.id.editText_change_pwd_new_confirm);
@@ -189,7 +192,10 @@ if(TextUtils.isEmpty(userPwdNew)){
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id= item.getItemId();
-        if(id==R.id.menu_refresh) {
+        if(id== android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(ChangePasswordActivity.this);
+        }
+         else if(id==R.id.menu_refresh) {
             startActivity(getIntent());
             finish();
             overridePendingTransition(0, 0);

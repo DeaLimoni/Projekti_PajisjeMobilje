@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -55,6 +56,7 @@ private static final String TAG ="DeleteProfileActivity";
         if (actionBar != null) {
             actionBar.setTitle("Delete Your Profile");
         }
+        actionBar.setDisplayHomeAsUpEnabled(true);
         progressBar = findViewById(R.id.progressBar);
         editTextUserPwd = findViewById(R.id.editText_delete_user_pwd);
         textViewAuthenticated = findViewById(R.id.textView_delete_user_authenticated);
@@ -221,7 +223,10 @@ alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id= item.getItemId();
-        if(id==R.id.menu_refresh) {
+        if(id== android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(DeleteProfileActivity.this);
+        }
+        else if(id==R.id.menu_refresh) {
             startActivity(getIntent());
             finish();
             overridePendingTransition(0, 0);

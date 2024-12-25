@@ -17,6 +17,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -47,8 +48,9 @@ private EditText editTextNewEmail, editTextPwd;
         if (actionBar != null) {
             actionBar.setTitle("Update Email");
         }
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-         progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
          editTextPwd = findViewById(R.id.editText_update_email_verify_password);
          editTextNewEmail = findViewById(R.id.editText_update_email_new);
          textViewAuthenticated = findViewById(R.id.textView_update_email_authenticated);
@@ -179,7 +181,10 @@ firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(new OnCompleteListe
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id= item.getItemId();
-        if(id==R.id.menu_refresh) {
+        if(id== android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(UpdateEmailActivity.this);
+        }
+         else if(id==R.id.menu_refresh) {
             startActivity(getIntent());
             finish();
             overridePendingTransition(0, 0);

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +43,7 @@ public class UserProfileActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Home");
         }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         swipeToRefresh();
 
 
@@ -177,7 +179,9 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id= item.getItemId();
-        if(id==R.id.menu_refresh){
+        if(id== android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(UserProfileActivity.this);
+        }else if(id==R.id.menu_refresh){
             startActivity(getIntent());
             finish();
             overridePendingTransition(0,0);

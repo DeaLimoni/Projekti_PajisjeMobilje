@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -34,7 +35,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
 
 
-        getSupportActionBar().setTitle("Forgot Password");
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.setTitle("Forgot Password");
+        }
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         editTextPwdResetEmail = findViewById(R.id.editText_password_reset_email);
         buttonPwdReset = findViewById(R.id.button_password_reset);
         progressBar = findViewById(R.id.progressBar);
