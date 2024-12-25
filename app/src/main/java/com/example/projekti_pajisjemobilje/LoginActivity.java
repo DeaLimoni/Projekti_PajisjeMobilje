@@ -18,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -54,14 +56,22 @@ public class LoginActivity extends AppCompatActivity {
 
         authProfile = FirebaseAuth.getInstance();
 
-Button buttonForgotPassword= findViewById(R.id.button_forgot_password);
-buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
+TextView textViewLinkResetPwd= findViewById(R.id.textView_forgot_password_link);
+        textViewLinkResetPwd.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         Toast.makeText(LoginActivity.this,"You can reset your password now!",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
     }
 });
+        TextView textViewLinkRegister= findViewById(R.id.textView_register_link);
+        textViewLinkRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this,"You can reset your password now!",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
 
         // Show/Hide password
         ImageView imageViewShowHidePwd = findViewById(R.id.imageView_show_hide_pwd);

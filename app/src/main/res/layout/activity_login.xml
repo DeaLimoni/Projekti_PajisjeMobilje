@@ -59,7 +59,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/RL_email"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="10dp"
     android:background="@drawable/border">
     <ImageView
         android:layout_width="35dp"
@@ -107,7 +107,7 @@
 </RelativeLayout>
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="85dp"
     android:id="@+id/RL_pwd"
     android:layout_below="@id/RL_email"
     android:background="@drawable/border"
@@ -129,11 +129,18 @@
         android:text="Password*"
         android:padding="6dp"
      />
+    <View
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:id="@+id/divider_pwd"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView_login_pwd"
+        android:background="@android:color/darker_gray"/>
 
 
 
     <EditText
-        android:layout_width="260dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/editText_login_pwd"
         android:layout_below="@id/textView_login_pwd"
@@ -153,35 +160,78 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:layout_below="@id/editText_login_pwd"
+        android:layout_below="@id/textView_login_pwd"
         />
 </RelativeLayout>
 
 
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="Login"
+            android:textColor="@color/white"
             android:id="@+id/button_login"
             android:layout_below="@id/RL_pwd"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="70dp"
+            android:textSize="20sp"
+       android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
             android:background="@color/purple_500"/>
 
 
 
-        <Button
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot Password?"
-            android:id="@+id/button_forgot_password"
-            android:layout_below="@+id/button_login"
-            android:background="@color/purple_500"
-            android:layout_marginRight="70dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="70dp"/>
+            android:layout_below="@id/button_login"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textView_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Do not have an account?"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/textView_register_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:textColor="@color/purple_700" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_login"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:layout_alignParentEnd="true">
+
+            <TextView
+                android:id="@+id/textView_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot your password?"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/textView_forgot_password_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/click_here_to_reset"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:textColor="@color/purple_700" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progressBar"

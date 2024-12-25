@@ -33,6 +33,7 @@
             android:layout_below="@id/imageView_logo"
             android:layout_centerHorizontal="true"
             android:text="FirebaseApp"
+            android:textSize="30sp"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/black"
@@ -46,6 +47,7 @@
             android:layout_centerHorizontal="true"
             android:text="Welcome to Android Firebase App"
             android:textAlignment="center"
+            android:textSize="20sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black"
             android:layout_marginBottom="30dp" />
@@ -58,6 +60,7 @@
             android:layout_below="@id/textView_main_head"
             android:background="@android:color/holo_red_dark"
             android:text="Login"
+            android:textSize="20sp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
@@ -81,8 +84,6 @@
             android:text="@string/register"
             android:textSize="16sp"
             android:textAlignment="center"
-            android:textColor="@color/purple_700"
-
-           />
+            android:textColor="@color/purple_700" />
     </RelativeLayout>
 </ScrollView>
