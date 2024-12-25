@@ -97,55 +97,78 @@
         android:hint="Enter email"
         android:inputType="textEmailAddress"
         android:padding="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:textSize="16sp"
+        android:textCursorDrawable="@drawable/edittextcursor"
         android:background="@android:color/transparent"
-android:layout_toEndOf="@id/imageViewEmail"
+        android:layout_toEndOf="@id/imageViewEmail"
+        />
+</RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/RL_pwd"
+    android:layout_below="@id/RL_email"
+    android:background="@drawable/border"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/imageViewPwd"
+        android:src="@drawable/ic_pwd"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_login_pwd"
+      android:layout_toEndOf="@id/imageViewPwd"
+        android:text="Password*"
+        android:padding="6dp"
+     />
+
+
+
+    <EditText
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_login_pwd"
+        android:layout_below="@id/textView_login_pwd"
+        android:hint="Enter password"
+        android:inputType="textPassword"
+        android:padding="6dp"
+        android:textSize="16sp"
+        android:layout_toEndOf="@id/imageViewPwd"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
+    <ImageView
+        android:id="@+id/imageView_show_hide_pwd"
+        android:layout_width="30dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/editText_login_pwd"
         />
 </RelativeLayout>
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView_login_pwd"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/RL_email"
-            android:text="Password*"
-            android:padding="6dp"
-            android:textColor="#555555"
-            android:textSize="16dp"/>
-
-        <ImageView
-            android:id="@+id/imageView_show_hide_pwd"
-            android:layout_width="30dp"
-            android:layout_height="32dp"
-            android:layout_below="@id/editText_login_pwd"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="-33dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_login_pwd"
-            android:layout_below="@id/textView_login_pwd"
-            android:hint="Enter password"
-            android:inputType="textPassword"
-            android:layout_marginStart="30dp"
-            android:padding="6dp"
-            android:textSize="16sp"
-            android:background="@drawable/border"
-            />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
             android:id="@+id/button_login"
-            android:layout_below="@+id/editText_login_pwd"
+            android:layout_below="@id/RL_pwd"
             android:layout_marginTop="50dp"
             android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"/>
+            android:layout_marginLeft="70dp"
+            android:background="@color/purple_500"/>
 
 
 
@@ -155,8 +178,9 @@ android:layout_toEndOf="@id/imageViewEmail"
             android:text="Forgot Password?"
             android:id="@+id/button_forgot_password"
             android:layout_below="@+id/button_login"
-
+            android:background="@color/purple_500"
             android:layout_marginRight="70dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="70dp"/>
 
         <ProgressBar
