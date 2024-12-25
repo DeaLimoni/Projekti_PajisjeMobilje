@@ -83,6 +83,7 @@
                 android:layout_marginRight="70dp"
                 android:layout_marginLeft="70dp"
                 android:textSize="20sp"
+                android:textColor="@color/white"
                 android:background="@color/purple_500"/>
 
             <ProgressBar
@@ -146,7 +147,8 @@
                 android:layout_marginRight="70dp"
                 android:background="@color/purple_500"
                 android:text="Update Email"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
     </LinearLayout>
