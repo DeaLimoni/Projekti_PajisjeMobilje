@@ -3,9 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
-    <color name="lime">#08ACD3</color>
-    <color name="purple_200">#FFBB86FC</color>
+    <color name="lime">#69ACBC</color>
+    <color name="purple_200">#49106B</color>
+    <color name = "purple_500">#754ee4</color>
+    <color name = "purple_700">#644ac3</color>
     <color name="dark_green">#006400</color>
-    <color name="light_gray">#D3D3D3</color>
+    <color name="light_gray">#edf2f7</color>
 
 </resources>

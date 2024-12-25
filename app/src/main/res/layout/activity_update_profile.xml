@@ -133,7 +133,7 @@
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
         android:layout_below="@id/editText_update_profile_mobile"
-        android:backgroundTint="@color/lime"/>
+        />
 
         <Button
             android:layout_width="match_parent"
@@ -142,8 +142,7 @@
             android:text="Update email"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
-            android:layout_below="@id/button_upload_profile_pic"
-            android:backgroundTint="@color/lime"/>
+            android:layout_below="@id/button_upload_profile_pic" />
 
         <Button
             android:layout_width="match_parent"
@@ -153,7 +152,7 @@
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
             android:layout_below="@id/button_profile_update_email"
-            android:backgroundTint="@color/lime"/>
+            />
 
         <ProgressBar
             android:id="@+id/progressBar"

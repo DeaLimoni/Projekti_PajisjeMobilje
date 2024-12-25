@@ -10,59 +10,77 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="80dp"
+        android:padding="60dp"
         android:layout_margin="20dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:radius="16dp">
 
         <ImageView
             android:id="@+id/imageView_logo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:maxWidth="200dp"
             android:adjustViewBounds="true"
-            android:maxWidth="190dp"
-            app:srcCompat="@drawable/foto1" />
+            app:srcCompat="@drawable/foto2"/>
 
+        <TextView
+            android:id="@+id/textView_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView_logo"
+            android:layout_centerHorizontal="true"
+            android:text="FirebaseApp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/black"
+            android:layout_marginBottom="10dp" />
 
         <TextView
             android:id="@+id/textView_main_head"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@id/imageView_logo"
-            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_app_name"
+            android:layout_centerHorizontal="true"
             android:text="Welcome to Android Firebase App"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            android:layout_marginBottom="30dp" />
 
         <Button
             android:id="@+id/button_login"
             android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView_main_head"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:background="@android:color/holo_red_dark"
             android:text="Login"
-            android:clickable="true"
-            android:focusable="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            />
 
-        <Button
-            android:id="@+id/button_register"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView_register"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/button_login"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/holo_red_dark"
-            android:text="Register"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_centerInParent="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:text="Do not have an account?"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:layout_marginBottom="5dp" />
 
+        <TextView
+            android:id="@+id/textView_register_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_register"
+            android:text="@string/register"
+            android:textAlignment="center"
+            android:textColor="@color/purple_700"
+            android:textSize="16sp"/>
     </RelativeLayout>
 </ScrollView>
