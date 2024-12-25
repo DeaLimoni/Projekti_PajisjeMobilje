@@ -61,6 +61,7 @@
             android:background="@android:color/holo_red_dark"
             android:text="Login"
             android:textSize="20sp"
+            android:textColor="@color/white"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"

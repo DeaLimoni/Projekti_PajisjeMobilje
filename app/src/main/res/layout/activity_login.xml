@@ -170,14 +170,14 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:textColor="@color/white"
             android:id="@+id/button_login"
             android:layout_below="@id/RL_pwd"
             android:textSize="20sp"
        android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="70dp"
-            android:background="@color/purple_500"/>
+            android:background="@color/purple_500"
+            android:textColor="@color/white"/>
 
 
 

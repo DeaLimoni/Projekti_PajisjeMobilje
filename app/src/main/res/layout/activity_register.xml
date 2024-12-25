@@ -198,6 +198,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="Register"
+            android:textColor="@color/white"
             android:background="@color/purple_500"
             android:textSize="20sp"/>
 

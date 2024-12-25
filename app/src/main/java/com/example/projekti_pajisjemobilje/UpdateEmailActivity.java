@@ -30,6 +30,7 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class UpdateEmailActivity extends AppCompatActivity {
 private FirebaseAuth authProfile;
 private FirebaseUser firebaseUser;
@@ -150,7 +151,7 @@ private EditText editTextNewEmail, editTextPwd;
     }
 
     private void updateEmail(FirebaseUser firebaseUser) {
-firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+     firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
     @Override
     public void onComplete(@NonNull Task<Void> task) {
       if(task.isComplete())  {

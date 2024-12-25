@@ -132,6 +132,8 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:layout_below="@id/editText_update_profile_mobile"
         android:background="@color/purple_500"
         />
@@ -145,6 +147,8 @@
             android:text="Update email"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             android:layout_below="@id/button_upload_profile_pic" />
 
         <Button
@@ -157,6 +161,8 @@
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
             android:layout_below="@id/button_profile_update_email"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             />
 
         <ProgressBar
